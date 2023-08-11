@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Controllers;
 
 use Barryvdh\DomPDF\PDF;
-use Livewire\Component;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SearchYearComponent extends Component
+class PdfController extends Controller
 {
-    public $year;
-    public $results;
+    //
+    public function generatePDF(Request $request){
 
-    public function search()
-    {
-        if ($this->year){
-            $this->results = DB::table('travails')
+           $results = DB::table('travails')
             ->select([
                 DB::raw('YEAR(`annee_publication`) as year'),
                 DB::raw('COUNT(*) as total'),
@@ -27,12 +24,10 @@ class SearchYearComponent extends Component
             ->whereYear('annee_publication', $this->year)
             ->groupBy(DB::raw('YEAR(`annee_publication`)'))
             ->get();
-        }
 
-    }
 
-    public function render()
-    {
-        return view('livewire.search-year-component');
+        $pdf = PDF::loadView('pdf', ['results' => $results]);
+
+        return $pdf->download('rapport.pdf');
     }
 }

@@ -33,4 +33,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/store', [ArchivageController::class, 'store'])->name('save-archive')->middleware('auth');
   });
 
+  Route::get('/generate-pdf', [PdfController::class, 'genaratePDF'])->name('generate-pdf');
+
 

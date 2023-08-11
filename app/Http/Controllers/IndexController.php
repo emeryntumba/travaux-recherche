@@ -58,6 +58,7 @@ class IndexController extends Controller
         });
 
         $results = $query->get();
+        
 
         return view('results', ['results' => $results]);
     }

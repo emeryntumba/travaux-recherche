@@ -54,19 +54,19 @@
      <div class="our">
         <div class="container">
            <div class="row d_flex">
-              <div class="col-md-6">
+              <div class="col-md-5">
                  <div class="img_box">
                     <figure><img src="{{asset('assets/images/img4.jpg')}}" alt="#"/></figure>
                  </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-7">
                  <div class="our_box">
                     <div class="titlepage">
-                       <h2><span class="text_norlam">Our Best </span> <br>Breakfast</h2>
+                       <h2><span class="text_norlam">Statistiques</span> <br>Archives</h2>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </p>
+                    <p>Faites comme toutes ces personnes qui ont gardé leur travail au meilleur endroit. Le tableau ci-après reprend les statistiques de notre archive sur les 5 dernières années </p>
 
-                    <table class="table">
+                    <table class="table table-responsive-sm">
                         <thead class="thead-dark">
                           <tr>
                             <th scope="col">ANNEE</th>
@@ -92,6 +92,7 @@
                         @endforeach
                         </tbody>
                       </table>
+
                     @livewire('search-year-component')
                  </div>
               </div>

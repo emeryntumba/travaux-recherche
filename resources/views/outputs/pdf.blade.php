@@ -1,12 +1,11 @@
-<div class="container">
-    <span>Voulez-vous voir les statistiques d'une autre année ? Entrez ici</span>
-    <form wire:submit.prevent="search">
-        <input type="text" class="form-control mb-2" wire:model="year" placeholder="Entrez l'année">
-        <button type="submit" class="read_more">Rechercher</button>
-    </form>
-
-
-    @if ($results)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rapport PDF</title>
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+</head>
+<body>
+    <h1>Rapport PDF</h1>
     <table class="table table-responsive-sm mt-3">
         <thead class="thead-dark">
           <tr>
@@ -33,8 +32,5 @@
         @endforeach
         </tbody>
       </table>
-    @endif
-
-</div>
-
-
+</body>
+</html>

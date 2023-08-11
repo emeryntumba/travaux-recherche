@@ -83,26 +83,7 @@
  </section>
 
 
- <div class="our">
-    <div class="container">
-       <div class="row d_flex">
-          <div class="col-md-6">
-             <div class="img_box">
-                <figure><img src="{{asset('assets/images/img4.jpg')}}" alt="#"/></figure>
-             </div>
-          </div>
-          <div class="col-md-6">
-             <div class="our_box">
-                <div class="titlepage">
-                   <h2><span class="text_norlam">Our Best </span> <br>Breakfast</h2>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </p>
-                <a class="read_more" href="#">Read More</a>
-             </div>
-          </div>
-       </div>
-    </div>
- </div>
+ 
 
   <!-- about -->
   <div id="about"  class="about">
