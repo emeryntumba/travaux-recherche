@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UserController extends Controller
@@ -51,6 +50,7 @@ class UserController extends Controller
             $user->name = request('name');
             $user->email = request('email');
             $user->password = request('password');
+            $user->role_id = 2;
             $user->save();
 
         } catch (\Exception $ex) {

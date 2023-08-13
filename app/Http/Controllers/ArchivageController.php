@@ -6,21 +6,39 @@ use App\Models\Travail;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ArchivageController extends Controller
 {
     //
     public function store(Request $request){
-        $this->validate($request, [
-            'intitule' => 'required',
-            'auteur' => 'required',
+
+        $validator = Validator::make($request->all(), [
+            'intitule' => ['required', 'string', 'max:255', function($attribute, $value, $fail){
+                $count = DB::table('travails')
+                ->where('type_travail', 'TFC')
+                ->orWhere('type_travail', 'TFE')
+                ->where('intitule', $value)
+                ->count();
+
+                if ($count > 0) {
+                    $fail("L'intitulé est déjà utilisé pour un travail de type 'TFC' ou 'TFE'");
+                }
+            }],
+            'type_travail' => ['required', 'in:TFC,TFE,RS,DEA,THESE'],
+            'auteur' =>'required',
             'theme' => 'required',
-            'directeur' => 'required',
             'encadreur' => 'required',
-            'type_travail' => 'required',
-            'file'=> 'required',
-            'date' => 'required'
+            'directeur' => 'required',
+            'file' => ['required', 'file', 'mimes:pdf, doc, docx'],
+            'date' => ['required', 'date'],
         ]);
+
+        if ($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
 
         $travail = new Travail();
@@ -39,5 +57,16 @@ class ArchivageController extends Controller
         ->route('archiver')
         ->with('archivage-success', 'Votre travail a été archivé avec succès, merci pour votre confiance :)');
 
+    }
+
+    public function telecharger($file){
+        $path = Storage::get('travaux'.$file);
+
+        if (file_exists($path)){
+            return response()->download($path);
+        }
+        else{
+            return abort(404);
+        }
     }
 }

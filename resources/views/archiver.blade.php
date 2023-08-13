@@ -30,6 +30,17 @@
                 <p class="alert alert-success">{{session('archivage-success')}}</p>
             </div>
         @endif
+        @if($errors->any())
+            <div class="col-12 alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
           <div class="col-md-12">
              <form class="" method="POST" action="{{route('save-archive')}}" enctype="multipart/form-data">
                 @csrf
@@ -54,9 +65,15 @@
                         <label class="date">Encadreur</label>
                         <input class="book_n" name="encadreur">
                      </div>
+
                      <div class="col-md-4">
+                        <label class="date">Fichier</label>
+                        <input class="book_n form-control" type="file" name="file">
+                     </div>
+
+                     <div class="col-md-4 form-group">
                         <label for="type_travail">Type de Travail</label>
-                        <select class="book_n form-control" id="type_travail" name="type_travail">
+                        <select class="book_n" id="type_travail" name="type_travail" disabled>
                           <option value="TFC">TFC</option>
                           <option value="TFE">TFE</option>
                           <option value="RS">RS</option>
@@ -64,10 +81,7 @@
                           <option value="THESE">THESE</option>
                         </select>
                       </div>
-                     <div class="col-md-4">
-                        <label class="date">Fichier</label>
-                        <input class="book_n form-control" type="file" name="file">
-                     </div>
+                      
                      <div class="col-md-4">
                         <label class="date">Date de Publication</label>
                         <input class="book_n" type="date" name="date">
@@ -83,7 +97,7 @@
  </section>
 
 
- 
+
 
   <!-- about -->
   <div id="about"  class="about">

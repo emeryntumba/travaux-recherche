@@ -50,6 +50,31 @@
         </div>
      </section>
      <!-- end form_lebal -->
+
+     <section>
+        <div class="container mt-5">
+            <div class="row ">
+                @foreach ($latest as $travail)
+
+                <div class="col-md-4">
+                    <div class="card my-3">
+                        <img src="{{ asset('assets/images/book.jpg')}}" alt="" class="card-img-top" style=" max-height:300px">
+                        <div class="card-body">
+                          <h5 class="card-title">Sujet: {{$travail->intitule}}</h5>
+                          <p class="card-text">Auteur: {{$travail->auteur}}</p>
+                          <p class="card-text">Thème: {{$travail->theme}}</p>
+                          <p class="card-text">Directeur: {{$travail->directeur}}</p>
+                          <p class="card-text">Encadreur: {{$travail->encadreur}}</p>
+                          <p class="card-text">Type de travail: {{$travail->type_travail}}</p>
+                          <p class="card-text">Date de publication: {{$travail->annee_publication}}</p>
+                          <a href="{{route('telecharger', ['file' => $travail->file ])}}"  class="book_btn">Télécharger</a>
+                        </div>
+                      </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
      <!-- our  section -->
      <div class="our">
         <div class="container">

@@ -23,10 +23,11 @@
 
  <section id="formulaire">
     <div class="container mt-5">
-        <div class="row row-cols-1 row-cols-md-2">
+        <div class="row row-cols-xl-3 row-cols-lg-2  row-cols-1 gx-5 gy-4">
             @foreach ($results as $travail)
-            <div class="col mb-4">
+            <div class="col">
                 <div class="card" style="width:18rem">
+                    <img src="{{ asset('assets/images/book.jpg')}}" alt="" class="card-img-top" style=" max-height:200px">
                   <div class="card-body">
                     <h5 class="card-title">Sujet: {{$travail->intitule}}</h5>
                     <p class="card-text">Auteur: {{$travail->auteur}}</p>
@@ -35,12 +36,16 @@
                     <p class="card-text">Encadreur: {{$travail->encadreur}}</p>
                     <p class="card-text">Type de travail: {{$travail->type_travail}}</p>
                     <p class="card-text">Date de publication: {{$travail->annee_publication}}</p>
-                    <a href="#" class="btn btn-primary">Télécharger</a>
+                    <a href="{{route('telecharger', ['file' => $travail->file ])}}"  class="book_btn">Télécharger</a>
                   </div>
                 </div>
             </div>
             @endforeach
 
+        </div>
+
+        <div>
+            <a href="{{route('generate-pdf')}}"><button type="button" class="btn btn-primary btn-lg btn-block">Exporter le résultat</button></a>
         </div>
     </div>
  </section>

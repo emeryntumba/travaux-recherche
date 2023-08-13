@@ -24,7 +24,12 @@ class IndexController extends Controller
         ->groupBy(DB::raw('YEAR(`annee_publication`)'))
         ->get();
 
-        return view('index', ['results' => $results]);
+        $latest = Travail::latest()->take(10)->get();
+
+        return view('index', [
+            'results' => $results,
+            'latest' => $latest
+        ]);
     }
 
 
@@ -41,25 +46,30 @@ class IndexController extends Controller
 
         $query = Travail::where(function($query) use ($auteur, $theme, $intitule, $directeur, $encadreur) {
             if ($auteur) {
-                $query->where('author', '=', $auteur);
+                $query->where('auteur', 'like', "%$auteur%");
             }
             if ($theme) {
-                $query->where('theme', '=', $theme);
+                $query->where('theme', 'like', "%$theme%");
             }
             if ($intitule) {
-                $query->where('intitule', '=', $intitule);
+                $query->where('intitule', 'like', "%$intitule%");
             }
             if ($directeur) {
-                $query->where('directeur', '=', $directeur);
+                $query->where('directeur', 'like', "%$directeur%");
             }
             if ($encadreur) {
-                $query->where('encadreur', '=', $encadreur);
+                $query->where('encadreur', 'like', "%$encadreur%");
             }
         });
 
+
         $results = $query->get();
-        
+
+        session(['results' => $results]);
+
 
         return view('results', ['results' => $results]);
     }
+
+
 }

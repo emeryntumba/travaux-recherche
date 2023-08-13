@@ -3,7 +3,9 @@
 use App\Http\Controllers\ArchivageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,10 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/store', [ArchivageController::class, 'store'])->name('save-archive')->middleware('auth');
   });
 
-  Route::get('/generate-pdf', [PdfController::class, 'genaratePDF'])->name('generate-pdf');
+  Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('generate-pdf');
 
+  Route::get('/telecharger/{file}', [ArchivageController::class, 'telecharger'])->name('telecharger');
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
