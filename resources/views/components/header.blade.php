@@ -38,8 +38,17 @@
                         </button>
                         <div class="dropdown-menu">
                             @if( auth()->check() )
-                                <a href="" class="text-decoration-none"><button class="dropdown-item" type="button">Mes publications</button></a>
+                                @if (Auth::user()->role_id===2)
+                                    <a href="{{route('travail')}}" class="text-decoration-none"><button class="dropdown-item" type="button">Mes publications</button></a>
+                                    <a href="{{ url('auth/signout')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se deconnecter</button></a>
+                                @elseif (Auth::user()->role_id===3)
+                                    <a href="" class="text-decoration-none"><button class="dropdown-item" type="button">Mes Téléchargement</button></a>
+                                    <a href="{{ url('auth/signout')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se deconnecter</button></a>
+                                @else
+                                <a href="{{route('travail')}}" class="text-decoration-none"><button class="dropdown-item" type="button">Mes publications</button></a>
                                 <a href="{{ url('auth/signout')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se deconnecter</button></a>
+                                @endif
+
                             @else
                                 <a href="{{ url('auth/login')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se connecter</button></a>
                                 <a href="{{ url('auth/register')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Créer un compte</button></a>

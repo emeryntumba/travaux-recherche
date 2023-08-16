@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Travail;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
     //
+    protected $session;
+
+    public function __construct(Store $session)
+    {
+        $this->session =$session;
+    }
     public function index(){
         $results = DB::table('travails')
         ->select([
@@ -24,7 +33,7 @@ class IndexController extends Controller
         ->groupBy(DB::raw('YEAR(`annee_publication`)'))
         ->get();
 
-        $latest = Travail::latest()->take(10)->get();
+        $latest = Travail::latest()->take(9)->get();
 
         return view('index', [
             'results' => $results,
@@ -65,11 +74,14 @@ class IndexController extends Controller
 
         $results = $query->get();
 
-        session(['results' => $results]);
-
-
+        $this->session->put('$results', $results);
         return view('results', ['results' => $results]);
     }
 
+    public function generatePDF(){
+        $results = $this->session->get('results');
+        $pdf = Pdf::loadView('outputs/pdf', ['results' => $results]);
+        return $pdf->download('rapport.pdf');
+    }
 
 }

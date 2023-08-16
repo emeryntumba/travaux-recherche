@@ -60,14 +60,14 @@
                     <div class="card my-3">
                         <img src="{{ asset('assets/images/book.jpg')}}" alt="" class="card-img-top" style=" max-height:300px">
                         <div class="card-body">
-                          <h5 class="card-title">Sujet: {{$travail->intitule}}</h5>
-                          <p class="card-text">Auteur: {{$travail->auteur}}</p>
-                          <p class="card-text">Thème: {{$travail->theme}}</p>
-                          <p class="card-text">Directeur: {{$travail->directeur}}</p>
-                          <p class="card-text">Encadreur: {{$travail->encadreur}}</p>
-                          <p class="card-text">Type de travail: {{$travail->type_travail}}</p>
-                          <p class="card-text">Date de publication: {{$travail->annee_publication}}</p>
-                          <a href="{{route('telecharger', ['file' => $travail->file ])}}"  class="book_btn">Télécharger</a>
+                          <h5 class="card-title">Sujet: <strong>{{$travail->intitule}}</strong></h5>
+                          <p class="card-text">Auteur: <strong>{{$travail->auteur}}</strong></p>
+                          <p class="card-text">Thème: <strong>{{$travail->theme}}</strong></p>
+                          <p class="card-text">Directeur: <strong>{{$travail->directeur}}</strong></p>
+                          <p class="card-text">Encadreur: <strong>{{$travail->encadreur}}</strong></p>
+                          <p class="card-text">Type de travail: <strong>{{$travail->type_travail}}</strong></p>
+                          <p class="card-text">Date de publication: <strong>{{$travail->annee_publication}}</strong></p>
+                          <a href="{{route('telecharger', $travail->file )}}"  class="book_btn">Télécharger</a>
                         </div>
                       </div>
                 </div>
@@ -125,27 +125,8 @@
         </div>
      </div>
      <!-- end our  section -->
-     <!-- about -->
-     <div id="about"  class="about">
-        <div class="container-fluid">
-           <div class="row d_flex">
-              <div class="col-md-6">
-                 <div class="about_text">
-                    <div class="titlepage">
-                       <h2>About Our Hotel</h2>
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </p>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-6">
-                 <div class="about_img">
-                    <figure><img src="{{asset('assets/images/about_img.jpg')}}" alt="#"/></figure>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-     <!-- end about -->
+
+    
 @section('custom-js')
      @livewireScripts
 @endsection

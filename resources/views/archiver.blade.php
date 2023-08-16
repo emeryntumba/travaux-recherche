@@ -47,33 +47,33 @@
                 <div class="row">
                    <div class="col-md-4">
                       <label class="date">Intitulé</label>
-                      <input class="book_n"  type="text" name="intitule">
+                      <input class="book_n"  type="text" name="intitule" required>
                    </div>
                    <div class="col-md-4">
                       <label class="date">Auteur</label>
-                      <input class="book_n" type="text" name="auteur">
+                      <input class="book_n" type="text" name="auteur" required>
                    </div>
                    <div class="col-md-4">
                       <label class="date">Theme</label>
-                      <input class="book_n" name="theme">
+                      <input class="book_n" name="theme" required>
                    </div>
                    <div class="col-md-4">
                         <label class="date">Directeur</label>
-                        <input class="book_n" name="directeur">
+                        <input class="book_n" name="directeur" required>
                     </div>
                     <div class="col-md-4">
                         <label class="date">Encadreur</label>
-                        <input class="book_n" name="encadreur">
+                        <input class="book_n" name="encadreur" required>
                      </div>
 
                      <div class="col-md-4">
                         <label class="date">Fichier</label>
-                        <input class="book_n form-control" type="file" name="file">
+                        <input class="book_n form-control" type="file" name="file" required>
                      </div>
 
                      <div class="col-md-4 form-group">
                         <label for="type_travail">Type de Travail</label>
-                        <select class="book_n" id="type_travail" name="type_travail" disabled>
+                        <select class="book_n" id="type_travail" name="type_travail" required>
                           <option value="TFC">TFC</option>
                           <option value="TFE">TFE</option>
                           <option value="RS">RS</option>
@@ -81,10 +81,10 @@
                           <option value="THESE">THESE</option>
                         </select>
                       </div>
-                      
+
                      <div class="col-md-4">
                         <label class="date">Date de Publication</label>
-                        <input class="book_n" type="date" name="date">
+                        <input class="book_n" type="date" name="date" required>
                      </div>
                    <div class="col-md-4">
                       <button class="book_btn" type="submit">Enregistrer<i></i></button>
@@ -97,27 +97,4 @@
  </section>
 
 
-
-
-  <!-- about -->
-  <div id="about"  class="about">
-    <div class="container-fluid">
-       <div class="row d_flex">
-          <div class="col-md-6">
-             <div class="about_text">
-                <div class="titlepage">
-                   <h2>About Our Hotel</h2>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </p>
-                </div>
-             </div>
-          </div>
-          <div class="col-md-6">
-             <div class="about_img">
-                <figure><img src="{{asset('assets/images/about_img.jpg')}}" alt="#"/></figure>
-             </div>
-          </div>
-       </div>
-    </div>
- </div>
- <!-- end about -->
 @endsection

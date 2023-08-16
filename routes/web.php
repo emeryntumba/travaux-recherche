@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArchivageController;
+use App\Http\Controllers\Archives\ArchiveController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PdfController;
@@ -35,10 +36,28 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/store', [ArchivageController::class, 'store'])->name('save-archive')->middleware('auth');
   });
 
-  Route::get('/generate-pdf', [PdfController::class, 'generatePDF'])->name('generate-pdf');
+Route::get('/generate-pdf', [IndexController::class, 'generatePDF'])->middleware('auth')->name('generate-pdf');
 
-  Route::get('/telecharger/{file}', [ArchivageController::class, 'telecharger'])->name('telecharger');
+Route::get('/storage/{file}', [ArchivageController::class, 'telecharger'])->middleware('auth')->name('telecharger');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+});
+
+Route::group(['prefix' => 'admin/travaux'], function(){
+
+    Route::get('/', [ArchiveController::class, 'index'])->name('travail');
+
+    Route::get('create', [ArchiveController::class, 'create'])->name('travail-create');
+
+    Route::get('{travail}', [ArchiveController::class, 'show'])->name('travail-show');
+
+    Route::get('{travail}/edit', [ArchiveController::class, 'edit'])->name('travail-edit');
+
+    Route::post('store', [ArchiveController::class, 'store'])->name('travail-store');
+
+    Route::put('{travail}', [ArchiveController::class, 'update'])->name('travail-update');
+
+    Route::delete('{travail}', [ArchiveController::class, 'destroy'])->name('travail-delete');
+
 });

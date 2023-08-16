@@ -26,7 +26,7 @@ class UserController extends Controller
             $request->session()->regenerate();
 
            // Flashy::success('Vous êtes actuellement connecté');
-            return redirect()->route('archiver');
+            return redirect()->intended();
         }
 
         // Flashy::error("Votre mot de passe est incorrect !");
@@ -50,7 +50,7 @@ class UserController extends Controller
             $user->name = request('name');
             $user->email = request('email');
             $user->password = request('password');
-            $user->role_id = 2;
+            $user->role_id = request('role');
             $user->save();
 
         } catch (\Exception $ex) {
@@ -67,7 +67,7 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('archiver');
+        return redirect()->intended();
 
 
     }

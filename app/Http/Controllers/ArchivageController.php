@@ -16,15 +16,13 @@ class ArchivageController extends Controller
     public function store(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'intitule' => ['required', 'string', 'max:255', function($attribute, $value, $fail){
-                $count = DB::table('travails')
-                ->where('type_travail', 'TFC')
-                ->orWhere('type_travail', 'TFE')
+            'intitule' => ['required', 'string', 'max:5000', function($attribute, $value, $fail){
+                $count = Travail::whereIn('type_travail', ['TFC', 'TFE'])
                 ->where('intitule', $value)
                 ->count();
 
                 if ($count > 0) {
-                    $fail("L'intitulé est déjà utilisé pour un travail de type 'TFC' ou 'TFE'");
+                    $fail("Archivage échoué, l'intitulé est déjà utilisé pour un travail de type 'TFC' ou 'TFE'");
                 }
             }],
             'type_travail' => ['required', 'in:TFC,TFE,RS,DEA,THESE'],
@@ -32,7 +30,7 @@ class ArchivageController extends Controller
             'theme' => 'required',
             'encadreur' => 'required',
             'directeur' => 'required',
-            'file' => ['required', 'file', 'mimes:pdf, doc, docx'],
+            'file' => ['required', 'file', 'mimes:pdf'],
             'date' => ['required', 'date'],
         ]);
 
@@ -54,19 +52,18 @@ class ArchivageController extends Controller
         $travail->save();
 
         return redirect()
-        ->route('archiver')
-        ->with('archivage-success', 'Votre travail a été archivé avec succès, merci pour votre confiance :)');
+        ->route('travail')
+        ->with('archivage', 'Votre travail a été archivé avec succès, merci pour votre confiance :)');
 
     }
 
     public function telecharger($file){
-        $path = Storage::get('travaux'.$file);
 
-        if (file_exists($path)){
-            return response()->download($path);
+        $path = 'storage/' . $file;
+        if (auth()->check()){
+            return Storage::download($path);
         }
-        else{
-            return abort(404);
-        }
+
+
     }
 }

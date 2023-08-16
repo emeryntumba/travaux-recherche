@@ -19,7 +19,17 @@
           </tr>
         </thead>
         <tbody>
-        
+            @foreach($results as $result)
+                <tr>
+                    <th scope="row">{{ $result->auteur }}</td>
+                    <td>{{ $result->intitule }}</td>
+                    <td>{{ $result->theme }}</td>
+                    <td>{{ $result->type_travail }}</td>
+                    <td>{{ $result->directeur }}</td>
+                    <td>{{ $result->encadreur }}</td>
+                    <td>{{ $result->annee_publication }}</td>
+                </tr>
+            @endforeach
         </tbody>
       </table>
 </body>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Barryvdh\DomPDF\PDF;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 

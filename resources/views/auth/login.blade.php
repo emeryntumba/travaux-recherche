@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 <body>
 
-    <div class="main">
+    <div class="contianer mt-5">
         <!-- Sing in  Form -->
         <section class="sign-in">
             <div class="container">

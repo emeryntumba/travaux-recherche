@@ -23,30 +23,40 @@
 
  <section id="formulaire">
     <div class="container mt-5">
-        <div class="row row-cols-xl-3 row-cols-lg-2  row-cols-1 gx-5 gy-4">
-            @foreach ($results as $travail)
-            <div class="col">
-                <div class="card" style="width:18rem">
-                    <img src="{{ asset('assets/images/book.jpg')}}" alt="" class="card-img-top" style=" max-height:200px">
-                  <div class="card-body">
-                    <h5 class="card-title">Sujet: {{$travail->intitule}}</h5>
-                    <p class="card-text">Auteur: {{$travail->auteur}}</p>
-                    <p class="card-text">Thème: {{$travail->theme}}</p>
-                    <p class="card-text">Directeur: {{$travail->directeur}}</p>
-                    <p class="card-text">Encadreur: {{$travail->encadreur}}</p>
-                    <p class="card-text">Type de travail: {{$travail->type_travail}}</p>
-                    <p class="card-text">Date de publication: {{$travail->annee_publication}}</p>
-                    <a href="{{route('telecharger', ['file' => $travail->file ])}}"  class="book_btn">Télécharger</a>
-                  </div>
+        <div class="row ">
+            @if (count($results) == 0)
+            <div class="alert alert-danger col-12 text-center">Pas de résultat pour cette requete</div>
+            @else
+                @foreach ($results as $travail)
+
+                <div class="col-md-4">
+                    <div class="card my-3">
+                        <img src="{{ asset('assets/images/book.jpg')}}" alt="" class="card-img-top" style=" max-height:300px">
+                        <div class="card-body">
+                        <h5 class="card-title">Sujet: <strong>{{$travail->intitule}}</strong></h5>
+                        <p class="card-text">Auteur: <strong>{{$travail->auteur}}</strong></p>
+                        <p class="card-text">Thème: <strong>{{$travail->theme}}</strong></p>
+                        <p class="card-text">Directeur: <strong>{{$travail->directeur}}</strong></p>
+                        <p class="card-text">Encadreur: <strong>{{$travail->encadreur}}</strong></p>
+                        <p class="card-text">Type de travail: <strong>{{$travail->type_travail}}</strong></p>
+                        <p class="card-text">Date de publication: <strong>{{$travail->annee_publication}}</strong></p>
+                        <a href="{{route('telecharger', ['file' => $travail->file ])}}"  class="book_btn">Télécharger</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            @endforeach
+                @endforeach
+
+            @endif
 
         </div>
 
-        <div>
-            <a href="{{route('generate-pdf')}}"><button type="button" class="btn btn-primary btn-lg btn-block">Exporter le résultat</button></a>
-        </div>
+        @if (count($results) != 0)
+        <a href="{{route('generate-pdf')}}"><button type="button" class="btn btn-dark  btn-block">Exporter le résultat</button></a>
+        @endif
+
+
+
+
     </div>
  </section>
 
