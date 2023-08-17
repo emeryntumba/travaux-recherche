@@ -60,6 +60,6 @@ Route::group(['prefix' => 'admin/travaux'], function(){
 
     Route::delete('{travail}', [ArchiveController::class, 'destroy'])->name('travail-delete');
 
-    Route::get('/generate-pdf', [ArchiveController::class, 'generatePDF'])->name('admin-pdf');
-
 });
+
+Route::get('/generate-report', [PdfController::class, 'generatePDF'])->name('admin-pdf')->middleware('auth');

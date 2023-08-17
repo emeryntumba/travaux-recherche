@@ -20,7 +20,7 @@
                    <div class="collapse navbar-collapse" id="navbarsExample04">
                       <ul class="navbar-nav mr-auto">
                          <li class="nav-item">
-                            <a class="nav-link" href="#about">A propos</a>
+                            <a class="nav-link" href="#">A propos</a>
                          </li>
                          <li class="nav-item">
                             <a class="nav-link" href="#contact">Nous contacter</a>

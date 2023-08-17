@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Archives;
 
-use App\Http\Controllers\Controller;
 use App\Models\Travail;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
@@ -13,11 +12,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class ArchiveController extends VoyagerBaseController
 {
 
-    protected $session;
+    protected $session_admin;
 
     public function __construct(Store $session)
     {
-        $this->session =$session;
+        $this->session_admin = $session;
     }
     /**
      * Display a listing of the resource.
@@ -33,16 +32,10 @@ class ArchiveController extends VoyagerBaseController
         }
 
         $travaux = Travail::all()->where('user_id', $user_id)->sortDesc();
-        $this->session->put('results', $travaux);
+        $results = $travaux;
+        $this->session_admin->put('results', $results);
         return view('archives.index', compact('travaux'));
     }
-
-    public function generatePDF(){
-        $results = $this->session->get('results');
-        $pdf = Pdf::loadView('outputs.pdf', ['results' => $results]);
-        return $pdf->download('rapport.pdf');
-    }
-
     /**
      * Show the form for creating a new resource.
      *

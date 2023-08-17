@@ -30,7 +30,7 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="#">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
@@ -39,7 +39,7 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{url('/#contact')}}">
           <i class="bi bi-envelope"></i>
           <span>Contact Admin</span>
         </a>
@@ -47,7 +47,7 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('voyager.logout')}}">
+        <a class="nav-link collapsed" href="{{route('signout')}}">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Se deconnecter</span>
         </a>

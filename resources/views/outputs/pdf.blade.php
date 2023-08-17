@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rapport de votre résultat</title>
+    <title>Rapport PDF</title>
     <style>
         /* Fichier public/css/pdf.css */
 
