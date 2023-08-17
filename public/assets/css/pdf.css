@@ -1,0 +1,49 @@
+/* Fichier public/css/pdf.css */
+
+/* Tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* En-tête du tableau */
+thead th {
+    background-color: #f5f5f5;
+    text-align: left;
+    padding: 8px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Lignes du tableau */
+tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternance de couleur pour les lignes */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Ajouter une marge au tableau */
+table {
+    margin-bottom: 20px;
+}
+
+/* Centrer le texte dans les cellules */
+table td, table th {
+    text-align: center;
+}
+
+/* Appliquer une couleur d'arrière-plan au total */
+tfoot td {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Ajouter une bordure en haut du total */
+tfoot td {
+    border-top: 2px solid #000;
+}

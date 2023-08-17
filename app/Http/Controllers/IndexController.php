@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Travail;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -74,13 +75,13 @@ class IndexController extends Controller
 
         $results = $query->get();
 
-        $this->session->put('$results', $results);
+        $this->session->put('results', $results);
         return view('results', ['results' => $results]);
     }
 
     public function generatePDF(){
         $results = $this->session->get('results');
-        $pdf = Pdf::loadView('outputs/pdf', ['results' => $results]);
+        $pdf = Pdf::loadView('outputs.pdf', ['results' => $results]);
         return $pdf->download('rapport.pdf');
     }
 

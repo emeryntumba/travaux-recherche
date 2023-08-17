@@ -34,6 +34,7 @@
         @endif
 
         <a href="{{route('archiver')}}"><button class="btn btn-success ms-4">Ajouter un travail</button></a>
+        <a href="{{route('admin-pdf')}}"><button class="btn btn-danger ms-4 text-white">Exporter en PDF</button></a>
 
             <div class="card mt-4">
                 <div class="card-body">

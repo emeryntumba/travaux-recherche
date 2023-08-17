@@ -5,20 +5,42 @@ namespace App\Http\Controllers\Archives;
 use App\Http\Controllers\Controller;
 use App\Models\Travail;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Http\Controllers\VoyagerBaseController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-class ArchiveController extends Controller
+class ArchiveController extends VoyagerBaseController
 {
+
+    protected $session;
+
+    public function __construct(Store $session)
+    {
+        $this->session =$session;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = Auth::user()->id;
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::index($request);
+        }
+
         $travaux = Travail::all()->where('user_id', $user_id)->sortDesc();
+        $this->session->put('results', $travaux);
         return view('archives.index', compact('travaux'));
+    }
+
+    public function generatePDF(){
+        $results = $this->session->get('results');
+        $pdf = Pdf::loadView('outputs.pdf', ['results' => $results]);
+        return $pdf->download('rapport.pdf');
     }
 
     /**
@@ -26,9 +48,12 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::create($request);
+        }
         return view('archives.create');
     }
 
@@ -40,7 +65,11 @@ class ArchiveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::store($request);
+        }
+        return redirect()->route('archiver');
     }
 
     /**
@@ -49,8 +78,12 @@ class ArchiveController extends Controller
      * @param  \App\Models\Travail  $travail
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::show($request, $id);
+        }
         $travail = Travail::find($id);
         return view('archives.show', compact('travail'));
     }
@@ -61,9 +94,18 @@ class ArchiveController extends Controller
      * @param  \App\Models\Travail  $travail
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $travail = Travail::find($id);
+
+        $user_id = Auth::user()->id;
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::edit($request, $id);
+        }
+        $travail = Travail::findOrFail($id);
+        if ($travail->user_id != $user->id){
+            abort(403, 'Vous n\'avez pas droit à accéder à cette ressource.');
+        }
         return view('archives.edit', compact('travail'));
     }
 
@@ -76,6 +118,10 @@ class ArchiveController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::update($request, $id);
+        }
         $travail = Travail::find($id);
 
         $travail->intitule = $request->intitule;
@@ -91,7 +137,7 @@ class ArchiveController extends Controller
 
         $travail->update();
 
-        return redirect()->to(route('travail'))->with('succes', "Modification avec succès");
+        return redirect()->route('travail')->with('succes', "Modification avec succès");
     }
 
     /**
@@ -100,8 +146,12 @@ class ArchiveController extends Controller
      * @param  \App\Models\Travail  $travail
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $user = Auth::user();
+        if ($user->role_id == 1){
+            return parent::destroy($request, $id);
+        }
         $travail = Travail::find($id);
         $travail->delete();
         return redirect()->to(route('travail'));

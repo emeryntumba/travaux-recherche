@@ -32,7 +32,7 @@
 
     @yield('content')
 
-    @livewire('footer-component')
+    <livewire:footer-component/>
 
     <!-- Javascript files-->
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>

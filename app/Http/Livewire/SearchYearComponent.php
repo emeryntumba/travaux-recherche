@@ -10,6 +10,10 @@ class SearchYearComponent extends Component
     public $year;
     public $results;
 
+    public function mount()  {
+        //$this->year = 2023;
+    }
+
     public function search()
     {
         if ($this->year){
@@ -27,6 +31,8 @@ class SearchYearComponent extends Component
             ->groupBy(DB::raw('YEAR(`annee_publication`)'))
             ->get();
         }
+
+        $this->reset('year');
 
     }
 

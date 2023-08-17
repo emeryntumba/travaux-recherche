@@ -1,7 +1,7 @@
 <div class="container">
     <span>Voulez-vous voir les statistiques d'une autre année ? Entrez ici</span>
     <form wire:submit.prevent="search">
-        <input type="text" class="form-control mb-2" wire:model="year" placeholder="Entrez l'année">
+        <input type="text" class="form-control mb-2" wire:model.defer="year" placeholder="Entrez l'année">
         <button type="submit" class="read_more">Rechercher</button>
     </form>
 
@@ -34,6 +34,7 @@
         </tbody>
       </table>
     @endif
+
 
 </div>
 

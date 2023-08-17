@@ -8,7 +8,7 @@
                    <h2>Nous contacter</h2>
                 </div>
                 <div class="cont">
-                   <h3>Vous avez un avis un avis à nous soumettre ? </h3>
+                   <h3>Vous avez un avis à nous soumettre ? </h3>
                    <p>Laissez votre message ici, et nous vous répondrons dès que possible. Notre service client est à votre portée aux jours ouvrables</p>
                 </div>
              </div>
@@ -29,9 +29,20 @@
                       <div class="col-sm-12">
                          <button class="send_btn" type="submit">Envoyez</button>
                       </div>
-                   </div>
+                      @if (session()->has('msgEnvoye'))
+                        <div class="col-sm-12 alert alert-success" role="alert">
+                            {{session('msgEnvoye')}}
+                        </div>
+                        <script>
+                            setTimeout(() => {
+                                document.querySelector('.alert').remove();
+                            }, 5000);
+                        </script>
+                        @endif
+                    </div>
                 </form>
              </div>
+
           </div>
        </div>
        <div class="copyright">
