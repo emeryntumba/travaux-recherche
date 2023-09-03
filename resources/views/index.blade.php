@@ -67,7 +67,7 @@
                           <p class="card-text">Encadreur: <strong>{{$travail->encadreur}}</strong></p>
                           <p class="card-text">Type de travail: <strong>{{$travail->type_travail}}</strong></p>
                           <p class="card-text">Date de publication: <strong>{{$travail->annee_publication}}</strong></p>
-                          <a href="{{route('telecharger', $travail->file )}}"  class="book_btn">Télécharger</a>
+                          <a href="{{route('telecharger', ['file' => $travail->file] )}}"  class="book_btn">Télécharger</a>
                         </div>
                       </div>
                 </div>
@@ -126,7 +126,7 @@
      </div>
      <!-- end our  section -->
 
-    
+
 @section('custom-js')
      @livewireScripts
 @endsection

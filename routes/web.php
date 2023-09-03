@@ -5,6 +5,7 @@ use App\Http\Controllers\Archives\ArchiveController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\TelechargementController;
 use App\Http\Controllers\UserController;
 use TCG\Voyager\Facades\Voyager;
 
@@ -38,11 +39,13 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::get('/generate-pdf', [IndexController::class, 'generatePDF'])->middleware('auth')->name('generate-pdf');
 
-Route::get('/storage/{file}', [ArchivageController::class, 'telecharger'])->middleware('auth')->name('telecharger');
+Route::get('storage/{file}', [IndexController::class, 'telecharger'])->name('telecharger');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/generate-report', [PdfController::class, 'generatePDF'])->name('admin-pdf')->middleware('auth');
 
 Route::group(['prefix' => 'admin/travaux'], function(){
 
@@ -62,4 +65,11 @@ Route::group(['prefix' => 'admin/travaux'], function(){
 
 });
 
-Route::get('/generate-report', [PdfController::class, 'generatePDF'])->name('admin-pdf')->middleware('auth');
+Route::group(['prefix' => 'downloaded'], function(){
+    Route::get('/', [TelechargementController::class, 'index'])->name('downloaded');
+    Route::post('store', [TelechargementController::class, 'store'])->name('downloaded-store');
+});
+
+
+
+

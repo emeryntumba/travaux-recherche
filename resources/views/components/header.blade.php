@@ -42,10 +42,10 @@
                                     <a href="{{route('travail')}}" class="text-decoration-none"><button class="dropdown-item" type="button">Mes publications</button></a>
                                     <a href="{{ url('auth/signout')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se deconnecter</button></a>
                                 @elseif (Auth::user()->role_id===3)
-                                    <a href="" class="text-decoration-none"><button class="dropdown-item" type="button">Mes Téléchargement</button></a>
+                                    <a href="{{url('downloaded/')}}" class="text-decoration-none"><button class="dropdown-item" type="button">Mes Téléchargement</button></a>
                                     <a href="{{ url('auth/signout')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se deconnecter</button></a>
                                 @else
-                                <a href="{{route('travail')}}" class="text-decoration-none"><button class="dropdown-item" type="button">Mes publications</button></a>
+                                <a href="{{url('admin/travails')}}" class="text-decoration-none"><button class="dropdown-item" type="button">Mes publications</button></a>
                                 <a href="{{ url('auth/signout')  }}" class="text-decoration-none"><button class="dropdown-item" type="button">Se deconnecter</button></a>
                                 @endif
 

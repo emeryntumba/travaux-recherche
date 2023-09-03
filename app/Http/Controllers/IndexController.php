@@ -8,7 +8,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
 {
@@ -44,6 +46,9 @@ class IndexController extends Controller
 
 
     public function archiver(){
+        if (Auth::user()->role_id == 3){
+            return redirect()->route('index')->with('error', "Vous n'avez pas le droit d'archiver, veuillez créer un compte archiviste");
+        }
         return view('archiver');
     }
 
@@ -82,7 +87,14 @@ class IndexController extends Controller
     public function generatePDF(){
         $results = $this->session->get('results');
         $pdf = Pdf::loadView('outputs.pdf', ['results' => $results]);
-        return $pdf->download('rapport.pdf');
+        return $pdf->stream('rapport.pdf');
     }
 
+    public function telecharger($name){
+
+        $path = 'storage/' . $name;
+        if (auth()->check()){
+            return Storage::download($path);
+        }
+    }
 }

@@ -6,14 +6,14 @@ use App\Models\Travail;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArchivageController extends Controller
 {
     //
     public function store(Request $request){
+
+
 
         $validator = Validator::make($request->all(), [
             'intitule' => ['required', 'string', 'max:5000', function($attribute, $value, $fail){
@@ -57,13 +57,5 @@ class ArchivageController extends Controller
 
     }
 
-    public function telecharger($file){
 
-        $path = 'storage/' . $file;
-        if (auth()->check()){
-            return Storage::download($path);
-        }
-
-
-    }
 }
